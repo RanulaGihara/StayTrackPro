@@ -4,31 +4,35 @@
     ViewData["Title"] = "Edit Reservation";
 }
 
-<h2 class="text-xl font-semibold mb-4">Edit Reservation</h2>
+<div class="container mt-4">
+    <h2 class="mb-4">Edit Reservation</h2>
 
-<form method="post" class="space-y-4">
-    <input type="hidden" asp-for="Reservation.Id" />
+    <form method="post">
+        <input type="hidden" asp-for="Reservation.Id" />
 
-    <div>
-        <label class="block font-medium">Guest Full Name</label>
-        <input asp-for="Reservation.GuestFullName" class="border p-2 w-full" />
-    </div>
+        <div class="mb-3">
+            <label asp-for="Reservation.GuestFullName" class="form-label"></label>
+            <input asp-for="Reservation.GuestFullName" class="form-control" />
+            <span asp-validation-for="Reservation.GuestFullName" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label class="block font-medium">Suite ID</label>
-        <input asp-for="Reservation.SuiteId" class="border p-2 w-full" />
-    </div>
+        <div class="mb-3">
+            <label asp-for="Reservation.SuiteId" class="form-label"></label>
+            <input asp-for="Reservation.SuiteId" class="form-control" />
+            <span asp-validation-for="Reservation.SuiteId" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label class="block font-medium">Arrival Date</label>
-        <input asp-for="Reservation.ArrivalDate" type="date" class="border p-2 w-full" />
-    </div>
+        <div class="mb-3">
+            <label asp-for="Reservation.ArrivalDate" class="form-label"></label>
+            <input asp-for="Reservation.ArrivalDate" type="date" class="form-control" />
+        </div>
 
-    <div>
-        <label class="block font-medium">Departure Date</label>
-        <input asp-for="Reservation.DepartureDate" type="date" class="border p-2 w-full" />
-    </div>
+        <div class="mb-3">
+            <label asp-for="Reservation.DepartureDate" class="form-label"></label>
+            <input asp-for="Reservation.DepartureDate" type="date" class="form-control" />
+        </div>
 
-    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Update</button>
-    <a asp-page="Index" class="ml-4 text-gray-600">Cancel</a>
-</form>
+        <button type="submit" class="btn btn-success">Update</button>
+        <a asp-page="Index" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>

@@ -29,3 +29,5 @@ C:\Projects\test\dotnet\StayTrackPro\obj\Debug\net8.0\refint\StayTrackPro.dll
 C:\Projects\test\dotnet\StayTrackPro\obj\Debug\net8.0\StayTrackPro.pdb
 C:\Projects\test\dotnet\StayTrackPro\obj\Debug\net8.0\StayTrackPro.genruntimeconfig.cache
 C:\Projects\test\dotnet\StayTrackPro\obj\Debug\net8.0\ref\StayTrackPro.dll
+C:\Projects\test\dotnet\StayTrackPro\bin\Debug\net8.0\package-lock.json
+C:\Projects\test\dotnet\StayTrackPro\bin\Debug\net8.0\package.json
