@@ -1,0 +1,16 @@
+﻿@page "{id:int}"
+@model StayTrackPro.Pages.Reservations.DetailsModel
+@{
+    ViewData["Title"] = "Reservation Details";
+}
+
+<h2 class="text-xl font-semibold mb-4">Reservation Details</h2>
+
+<div class="space-y-2">
+    <p><strong>Guest Name:</strong> @Model.Reservation.GuestFullName</p>
+    <p><strong>Suite ID:</strong> @Model.Reservation.SuiteId</p>
+    <p><strong>Arrival Date:</strong> @Model.Reservation.ArrivalDate.ToShortDateString()</p>
+    <p><strong>Departure Date:</strong> @Model.Reservation.DepartureDate.ToShortDateString()</p>
+</div>
+
+<a asp-page="Index" class="mt-4 inline-block text-blue-600">Back to List</a>

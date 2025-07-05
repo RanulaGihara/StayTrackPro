@@ -1,0 +1,34 @@
+﻿@page
+@model StayTrackPro.Pages.Reservations.CreateModel
+@{
+    ViewData["Title"] = "Create Reservation";
+}
+
+<h2 class="text-xl font-semibold mb-4">Create a New Reservation</h2>
+
+<form method="post" class="space-y-4">
+    <div>
+        <label class="block font-medium">Guest Full Name</label>
+        <input asp-for="Reservation.GuestFullName" class="border p-2 w-full" />
+        <span asp-validation-for="Reservation.GuestFullName" class="text-red-500"></span>
+    </div>
+
+    <div>
+        <label class="block font-medium">Suite ID</label>
+        <input asp-for="Reservation.SuiteId" class="border p-2 w-full" />
+        <span asp-validation-for="Reservation.SuiteId" class="text-red-500"></span>
+    </div>
+
+    <div>
+        <label class="block font-medium">Arrival Date</label>
+        <input asp-for="Reservation.ArrivalDate" type="date" class="border p-2 w-full" />
+    </div>
+
+    <div>
+        <label class="block font-medium">Departure Date</label>
+        <input asp-for="Reservation.DepartureDate" type="date" class="border p-2 w-full" />
+    </div>
+
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Create</button>
+    <a asp-page="Index" class="ml-4 text-gray-600">Cancel</a>
+</form>

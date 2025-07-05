@@ -1,0 +1,36 @@
+﻿@page
+@model StayTrackPro.Pages.Reservations.IndexModel
+@{
+    ViewData["Title"] = "All Reservations";
+}
+
+<h2>Reservations</h2>
+<a asp-page="Create">Create New Reservation</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Guest</th>
+            <th>Suite</th>
+            <th>Arrival</th>
+            <th>Departure</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Reservations)
+        {
+            <tr>
+                <td>@item.GuestFullName</td>
+                <td>@item.SuiteId</td>
+                <td>@item.ArrivalDate.ToShortDateString()</td>
+                <td>@item.DepartureDate.ToShortDateString()</td>
+                <td>
+                    <a asp-page="Details" asp-route-id="@item.Id">View</a> |
+                    <a asp-page="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,22 @@
+﻿@page "{id:int}"
+@model StayTrackPro.Pages.Reservations.DeleteModel
+@{
+    ViewData["Title"] = "Delete Reservation";
+}
+
+<h2 class="text-xl font-semibold mb-4 text-red-600">Delete Confirmation</h2>
+
+<p>Are you sure you want to delete this reservation?</p>
+
+<ul class="mb-4">
+    <li><strong>Guest:</strong> @Model.Reservation.GuestFullName</li>
+    <li><strong>Suite ID:</strong> @Model.Reservation.SuiteId</li>
+    <li><strong>Arrival:</strong> @Model.Reservation.ArrivalDate.ToShortDateString()</li>
+    <li><strong>Departure:</strong> @Model.Reservation.DepartureDate.ToShortDateString()</li>
+</ul>
+
+<form method="post">
+    <input type="hidden" asp-for="Reservation.Id" />
+    <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded">Delete</button>
+    <a asp-page="Index" class="ml-4 text-gray-600">Cancel</a>
+</form>
