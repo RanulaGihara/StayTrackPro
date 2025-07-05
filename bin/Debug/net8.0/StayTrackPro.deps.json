@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "StayTrackPro/1.0.0": {
+        "runtime": {
+          "StayTrackPro.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "StayTrackPro/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
