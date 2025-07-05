@@ -1,0 +1,49 @@
+# .NET build files
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code settings
+.vscode/
+
+# Build outputs
+*.dll
+*.exe
+*.app
+*.pdb
+*.cache
+*.log
+
+# ASP.NET secrets
+secrets.json
+
+# Node/NPM
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Tailwind output (optional)
+wwwroot/css/output.css
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Publish folder (optional)
+publish/
+
+# JetBrains IDEs
+.idea/
+
+# Other
+*.vspscc
+*.vssscc
+_ReSharper.*
+*.ncrunch*
+*.VisualState.xml
+_TestResult.xml
