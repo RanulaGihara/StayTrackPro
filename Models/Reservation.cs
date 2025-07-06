@@ -7,5 +7,5 @@ public class Reservation
     public int SuiteId { get; set; }
     public DateTime ArrivalDate { get; set; }
     public DateTime DepartureDate { get; set; }
-    public List<GuestNote> Notes { get; set; } = new();
+    public List<SpecialRequest> SpecialRequests { get; set; } = new();
 }

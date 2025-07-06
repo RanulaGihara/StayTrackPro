@@ -1,6 +1,6 @@
 namespace StayTrackPro.Models;
 
-public class GuestNote
+public class SpecialRequest
 {
     public int Id { get; set; }
     public string Content { get; set; }
