@@ -1,0 +1,22 @@
+﻿@page "{id:int}"
+@model StayTrackPro.Pages.Suites.DeleteModel
+@{
+    ViewData["Title"] = "Delete Suite";
+}
+
+<div class="container mt-4">
+    <h2 class="text-danger mb-3">Delete Confirmation</h2>
+
+    <p>Are you sure you want to delete this suite?</p>
+
+    <ul class="list-group mb-4">
+        <li class="list-group-item"><strong>Suite Name:</strong> @Model.Suite.SuiteName</li>
+        <li class="list-group-item"><strong>Type:</strong> @Model.Suite.Type</li>
+    </ul>
+
+    <form method="post">
+        <input type="hidden" asp-for="Suite.Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-page="Index" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>

@@ -1,0 +1,26 @@
+﻿@page "{id:int}"
+@model StayTrackPro.Pages.Suites.EditModel
+@{
+    ViewData["Title"] = "Edit Suite";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Edit Suite</h2>
+
+    <form method="post">
+        <input type="hidden" asp-for="Suite.Id" />
+
+        <div class="mb-3">
+            <label asp-for="Suite.SuiteName" class="form-label"></label>
+            <input asp-for="Suite.SuiteName" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Suite.Type" class="form-label"></label>
+            <input asp-for="Suite.Type" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Update</button>
+        <a asp-page="Index" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>

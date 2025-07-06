@@ -1,0 +1,41 @@
+﻿@page
+@model StayTrackPro.Pages.Suites.IndexModel
+@{
+    ViewData["Title"] = "All Suites";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3">Suites</h2>
+
+    <a asp-page="Create" class="btn btn-primary mb-3">Add New Suite</a>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-light">
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var suite in Model.Suites)
+            {
+                <tr>
+                    <td>@suite.SuiteName</td>
+                    <td>@suite.Type</td>
+                    <td>
+                        <a asp-page="Details" asp-route-id="@suite.Id" class="btn btn-sm btn-outline-info me-1" title="View">
+                            <i class="bi bi-eye"></i>
+                        </a>
+                        <a asp-page="Edit" asp-route-id="@suite.Id" class="btn btn-sm btn-outline-warning me-1" title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a asp-page="Delete" asp-route-id="@suite.Id" class="btn btn-sm btn-outline-danger" title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

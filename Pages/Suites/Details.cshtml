@@ -1,0 +1,19 @@
+﻿@page "{id:int}"
+@model StayTrackPro.Pages.Suites.DetailsModel
+@{
+    ViewData["Title"] = "Suite Details";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Suite Details</h2>
+
+    <dl class="row">
+        <dt class="col-sm-3">Suite Name</dt>
+        <dd class="col-sm-9">@Model.Suite.SuiteName</dd>
+
+        <dt class="col-sm-3">Type</dt>
+        <dd class="col-sm-9">@Model.Suite.Type</dd>
+    </dl>
+
+    <a asp-page="Index" class="btn btn-outline-primary mt-3">Back to List</a>
+</div>
