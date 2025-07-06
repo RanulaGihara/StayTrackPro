@@ -10,10 +10,18 @@ public class CreateModel : PageModel
     [BindProperty]
     public Reservation Reservation { get; set; }
 
+    public List<Suite> AvailableSuites { get; set; }
+
+    public void OnGet()
+    {
+        AvailableSuites = AppMemoryContext.Suites;
+    }
+
     public IActionResult OnPost()
     {
         if (!ModelState.IsValid)
         {
+            AvailableSuites = AppMemoryContext.Suites; // re-bind dropdown on validation error
             return Page();
         }
 

@@ -16,7 +16,11 @@
 
         <div class="mb-3">
             <label asp-for="Reservation.SuiteId" class="form-label"></label>
-            <input asp-for="Reservation.SuiteId" class="form-control" />
+            <select asp-for="Reservation.SuiteId"
+                    class="form-select"
+                    asp-items="@(new SelectList(Model.AvailableSuites, "Id", "SuiteName"))">
+                <option value="">-- Select a Suite --</option>
+            </select>
             <span asp-validation-for="Reservation.SuiteId" class="text-danger"></span>
         </div>
 
