@@ -2,6 +2,13 @@
 @model StayTrackPro.Pages.Reservations.DetailsModel
 @{
     ViewData["Title"] = "Reservation Details";
+
+    var suiteType = StayTrackPro.Data.AppMemoryContext.Suites
+        .FirstOrDefault(s => s.Id == Model.Reservation.SuiteId)?.Type ?? "Unknown";
+
+        
+    var suiteName = StayTrackPro.Data.AppMemoryContext.Suites
+        .FirstOrDefault(s => s.Id == Model.Reservation.SuiteId)?.SuiteName ?? "Unknown";
 }
 
 <div class="container mt-4">
@@ -11,11 +18,11 @@
         <dt class="col-sm-3">Guest Name</dt>
         <dd class="col-sm-9">@Model.Reservation.GuestFullName</dd>
 
-        <dt class="col-sm-3">Suite Type</dt>
-        <dd class="col-sm-9">
-            @StayTrackPro.Data.AppMemoryContext.Suites
-                .FirstOrDefault(s => s.Id == Model.Reservation.SuiteId)?.Type ?? "Unknown"
-        </dd>
+        <dt class="col-sm-3">Suite NAme</dt>
+        <dd class="col-sm-9">@suiteType</dd>
+
+         <dt class="col-sm-3">Suite Type</dt>
+        <dd class="col-sm-9">@suiteName</dd>
 
         <dt class="col-sm-3">Arrival Date</dt>
         <dd class="col-sm-9">@Model.Reservation.ArrivalDate.ToShortDateString()</dd>
