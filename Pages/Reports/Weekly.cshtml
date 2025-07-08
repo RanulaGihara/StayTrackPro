@@ -1,4 +1,44 @@
 ﻿@page
-@model MyApp.Namespace.WeeklyModel
+@model StayTrackPro.Pages.Reports.WeeklyModel
 @{
+    ViewData["Title"] = "Weekly Booking Report";
+    var dayNames = Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>();
 }
+
+<div class="container mt-4">
+    <h2 class="mb-4">Weekly Booking Report</h2>
+
+    <div class="row">
+        @foreach (var day in dayNames)
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 border-primary">
+                    <div class="card-header bg-primary text-white">
+                        <strong>@day</strong>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.WeeklyReservations.ContainsKey(day))
+                        {
+                            @foreach (var reservation in Model.WeeklyReservations[day])
+                            {
+                                <div class="mb-3 border-bottom pb-2">
+                                    <p class="mb-1"><strong>Guest:</strong> @reservation.GuestFullName</p>
+                                    <p class="mb-1"><strong>Suite:</strong> @Model.GetSuiteName(reservation.SuiteId)</p>
+                                    <p class="mb-1"><strong>Type:</strong> @Model.GetSuiteType(reservation.SuiteId)</p>
+                                    <p class="mb-1"><strong>Arrive:</strong> @reservation.ArrivalDate.ToShortDateString()</p>
+                                    <p class="mb-1"><strong>Depart:</strong> @reservation.DepartureDate.ToShortDateString()</p>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p class="text-muted">No bookings.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <a asp-page="/Index" class="btn btn-outline-secondary mt-3">Back to Dashboard</a>
+</div>
