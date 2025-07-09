@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using StayTrackPro.Data;
 using StayTrackPro.Models;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
+
 
 namespace StayTrackPro.Pages.Chatbot;
 
@@ -12,9 +14,10 @@ public class AssistantModel : PageModel
     public string Query { get; set; }
     public string Response { get; set; }
 
+    public List<ChatMessage> Messages { get; set; } = new();
     private readonly string[] greetings = { "hi", "hello", "hey", "good morning", "good afternoon", "good evening", "greetings" };
     private readonly string[] farewell = { "bye", "goodbye", "see you", "farewell", "thanks", "thank you" };
-    
+
 
     private readonly Dictionary<string, string[]> roomKeywords = new()
     {
@@ -32,180 +35,172 @@ public class AssistantModel : PageModel
         { "tomorrow", 1 },
         { "day after tomorrow", 2 },
         { "next week", 7 },
-        { "this weekend", 0 } 
+        { "this weekend", 0 }
     };
 
-    public void OnPost()
+   public void OnPost()
     {
+        LoadHistory(); 
+
         if (string.IsNullOrWhiteSpace(Query))
         {
-            Response = "I'm here to help! Please ask me something about our rooms or availability. ";
-            return;
+            Response = "I'm here to help! Please ask me something about our rooms or availability.";
         }
+        else
+        {
+            var lower = Query.ToLower().Trim();
 
-        var lower = Query.ToLower().Trim();
+            if (IsGreeting(lower))
+            {
+                Response = GetGreetingResponse();
+            }
+            else if (IsFarewell(lower))
+            {
+                Response = GetFarewellResponse();
+            }
+            else if (IsHelpRequest(lower))
+            {
+                Response = GetHelpResponse();
+            }
+            else if (IsGeneralQuestion(lower))
+            {
+                Response = HandleGeneralQuestion(lower);
+            }
+            else if (IsAvailabilityQuestion(lower))
+            {
+                Response = HandleAvailabilityQuestion(lower);
+            }
+            else if (IsPricingQuestion(lower))
+            {
+                Response = HandlePricingQuestion(lower);
+            }
+            else if (IsRoomInfoQuestion(lower))
+            {
+                Response = HandleRoomInfoQuestion(lower);
+            }
+            else
+            {
+                Response = "I'm not sure I understand that. I can help you with:\n" +
+                        "• Room availability (\"Is a deluxe suite available on Friday?\")\n" +
+                        "• Pricing information (\"How much is a standard room?\")\n" +
+                        "• Room details (\"Tell me about the executive suite\")\n" +
+                        "• General hotel information\n\n" +
+                        "What would you like to know?";
+            }
+
         
-
-        if (IsGreeting(lower))
-        {
-            Response = GetGreetingResponse();
-            return;
+            Messages.Add(new ChatMessage { Sender = "user", Content = Query });
+            Messages.Add(new ChatMessage { Sender = "bot", Content = Response });
         }
 
-
-        if (IsFarewell(lower))
-        {
-            Response = GetFarewellResponse();
-            return;
+        SaveHistory(); 
         }
 
-
-        if (IsHelpRequest(lower))
+        private bool IsGreeting(string query)
         {
-            Response = GetHelpResponse();
-            return;
+            return greetings.Any(g => query.Contains(g));
         }
 
-        
-        if (IsGeneralQuestion(lower))
+        private bool IsFarewell(string query)
         {
-            Response = HandleGeneralQuestion(lower);
-            return;
+            return farewell.Any(f => query.Contains(f));
         }
 
-      
-        if (IsAvailabilityQuestion(lower))
+        private bool IsHelpRequest(string query)
         {
-            Response = HandleAvailabilityQuestion(lower);
-            return;
+            return query.Contains("help") || query.Contains("what can you do") ||
+                query.Contains("how can you help") || query.Contains("assist");
         }
 
-       
-        if (IsPricingQuestion(lower))
+        private bool IsGeneralQuestion(string query)
         {
-            Response = HandlePricingQuestion(lower);
-            return;
+            return query.Contains("about") || query.Contains("hotel") ||
+                query.Contains("location") || query.Contains("amenities") ||
+                query.Contains("facilities") || query.Contains("services");
         }
 
-        if (IsRoomInfoQuestion(lower))
+        private bool IsAvailabilityQuestion(string query)
         {
-            Response = HandleRoomInfoQuestion(lower);
-            return;
+            return query.Contains("available") || query.Contains("free") ||
+                query.Contains("vacancy") || query.Contains("book") ||
+                query.Contains("reserve") || query.Contains("check in");
         }
 
-        Response = "I'm not sure I understand that. I can help you with:\n" +
-                  "• Room availability (\"Is a deluxe suite available on Friday?\")\n" +
-                  "• Pricing information (\"How much is a standard room?\")\n" +
-                  "• Room details (\"Tell me about the executive suite\")\n" +
-                  "• General hotel information\n\n" +
-                  "What would you like to know? ";
-    }
-
-    private bool IsGreeting(string query)
-    {
-        return greetings.Any(g => query.Contains(g));
-    }
-
-    private bool IsFarewell(string query)
-    {
-        return farewell.Any(f => query.Contains(f));
-    }
-
-    private bool IsHelpRequest(string query)
-    {
-        return query.Contains("help") || query.Contains("what can you do") || 
-               query.Contains("how can you help") || query.Contains("assist");
-    }
-
-    private bool IsGeneralQuestion(string query)
-    {
-        return query.Contains("about") || query.Contains("hotel") || 
-               query.Contains("location") || query.Contains("amenities") ||
-               query.Contains("facilities") || query.Contains("services");
-    }
-
-    private bool IsAvailabilityQuestion(string query)
-    {
-        return query.Contains("available") || query.Contains("free") || 
-               query.Contains("vacancy") || query.Contains("book") ||
-               query.Contains("reserve") || query.Contains("check in");
-    }
-
-    private bool IsPricingQuestion(string query)
-    {
-        return query.Contains("price") || query.Contains("cost") || 
-               query.Contains("rate") || query.Contains("fee") ||
-               query.Contains("how much") || query.Contains("charge");
-    }
-
-    private bool IsRoomInfoQuestion(string query)
-    {
-        return query.Contains("tell me about") || query.Contains("describe") || 
-               query.Contains("features") || query.Contains("amenities") ||
-               query.Contains("what's in") || query.Contains("room details");
-    }
-
-    private string GetGreetingResponse()
-    {
-        var responses = new[]
+        private bool IsPricingQuestion(string query)
         {
-            "Hello! Welcome to StayTrack Pro!  How can I assist you with your booking today?",
-            "Hi there! I'm your booking assistant. What can I help you find today?",
-            "Hey! Great to see you here. I'm ready to help with room availability, pricing, or any questions about our suites!",
-            "Good to see you! I'm here to make your booking experience smooth. What would you like to know?"
-        };
-        
-        return responses[new Random().Next(responses.Length)];
-    }
-
-    private string GetFarewellResponse()
-    {
-        var responses = new[]
-        {
-            "Thank you for using StayTrack Pro! Have a wonderful day! ",
-            "Goodbye! Feel free to come back anytime if you need help with bookings. ",
-            "Thanks for visiting! I hope I was helpful. See you soon! ",
-            "Take care! Don't hesitate to return if you have more questions about our rooms."
-        };
-        
-        return responses[new Random().Next(responses.Length)];
-    }
-
-    private string GetHelpResponse()
-    {
-        return "I'm your booking assistant! Here's what I can help you with:\n\n" +
-               " **Room Availability**: Ask about specific dates and room types\n" +
-               " **Pricing**: Get rate information for different suites\n" +
-               " **Room Details**: Learn about amenities and features\n" +
-               "**Booking Help**: Assistance with reservations\n\n" +
-               "Try asking something like:\n" +
-               "• \"Is a deluxe suite available this Friday?\"\n" +
-               "• \"How much is a standard room?\"\n" +
-               "• \"Tell me about the executive suite\"\n\n" +
-               "What would you like to know? ";
-    }
-
-    private string HandleGeneralQuestion(string query)
-    {
-        if (query.Contains("location"))
-        {
-            return "We're conveniently located in the heart of the city!  Our hotel offers easy access to major attractions and business districts.";
+            return query.Contains("price") || query.Contains("cost") ||
+                query.Contains("rate") || query.Contains("fee") ||
+                query.Contains("how much") || query.Contains("charge");
         }
-        
-        if (query.Contains("amenities") || query.Contains("facilities"))
+
+        private bool IsRoomInfoQuestion(string query)
         {
-            return "Our hotel features amazing amenities including:\n" +
-                   " Swimming pool\n" +
-                   "Restaurant and room service\n" +
-                   "Business center\n" +
-                   "Parking available\n" +
-                   "Free WiFi throughout\n" +
-                   "Fitness center\n\n" +
-                   "Would you like to know about a specific room type?";
+            return query.Contains("tell me about") || query.Contains("describe") ||
+                query.Contains("features") || query.Contains("amenities") ||
+                query.Contains("what's in") || query.Contains("room details");
         }
-        
-        return "StayTrack Pro offers comfortable accommodations with excellent service!  " +
-               "We have various suite types to meet your needs. What specific information would you like?";
+
+        private string GetGreetingResponse()
+        {
+            var responses = new[]
+            {
+                "Hello! Welcome to StayTrack Pro!  How can I assist you with your booking today?",
+                "Hi there! I'm your booking assistant. What can I help you find today?",
+                "Hey! Great to see you here. I'm ready to help with room availability, pricing, or any questions about our suites!",
+                "Good to see you! I'm here to make your booking experience smooth. What would you like to know?"
+            };
+
+            return responses[new Random().Next(responses.Length)];
+        }
+
+        private string GetFarewellResponse()
+        {
+            var responses = new[]
+            {
+                "Thank you for using StayTrack Pro! Have a wonderful day! ",
+                "Goodbye! Feel free to come back anytime if you need help with bookings. ",
+                "Thanks for visiting! I hope I was helpful. See you soon! ",
+                "Take care! Don't hesitate to return if you have more questions about our rooms."
+            };
+
+            return responses[new Random().Next(responses.Length)];
+        }
+
+        private string GetHelpResponse()
+        {
+            return "I'm your booking assistant! Here's what I can help you with:\n\n" +
+                " **Room Availability**: Ask about specific dates and room types\n" +
+                " **Pricing**: Get rate information for different suites\n" +
+                " **Room Details**: Learn about amenities and features\n" +
+                "**Booking Help**: Assistance with reservations\n\n" +
+                "Try asking something like:\n" +
+                "• \"Is a deluxe suite available this Friday?\"\n" +
+                "• \"How much is a standard room?\"\n" +
+                "• \"Tell me about the executive suite\"\n\n" +
+                "What would you like to know? ";
+        }
+
+        private string HandleGeneralQuestion(string query)
+        {
+            if (query.Contains("location"))
+            {
+                return "We're conveniently located in the heart of the city!  Our hotel offers easy access to major attractions and business districts.";
+            }
+
+            if (query.Contains("amenities") || query.Contains("facilities"))
+            {
+                return "Our hotel features amazing amenities including:\n" +
+                    " Swimming pool\n" +
+                    "Restaurant and room service\n" +
+                    "Business center\n" +
+                    "Parking available\n" +
+                    "Free WiFi throughout\n" +
+                    "Fitness center\n\n" +
+                    "Would you like to know about a specific room type?";
+            }
+
+            return "StayTrack Pro offers comfortable accommodations with excellent service!  " +
+                "We have various suite types to meet your needs. What specific information would you like?";
     }
 
     private string HandleAvailabilityQuestion(string query)
@@ -239,7 +234,7 @@ public class AssistantModel : PageModel
     private string HandlePricingQuestion(string query)
     {
         var matchingSuites = ExtractRoomTypes(query);
-        
+
         if (!matchingSuites.Any())
         {
             return "I'd be happy to provide pricing information!  Could you specify which room type you're interested in? " +
@@ -248,7 +243,7 @@ public class AssistantModel : PageModel
 
         var suite = matchingSuites.First();
         var basePrice = GetSuitePrice(suite.Type);
-        
+
         return $"The {suite.Type} suite \"{suite.SuiteName}\" starts at ${basePrice} per night. 💳\n" +
                "Rates may vary based on:\n" +
                "• Season and demand\n" +
@@ -260,7 +255,7 @@ public class AssistantModel : PageModel
     private string HandleRoomInfoQuestion(string query)
     {
         var matchingSuites = ExtractRoomTypes(query);
-        
+
         if (!matchingSuites.Any())
         {
             return "I'd love to tell you about our rooms!  Which suite type interests you?\n" +
@@ -277,13 +272,13 @@ public class AssistantModel : PageModel
     private List<Suite> ExtractRoomTypes(string query)
     {
         var matchingSuites = new List<Suite>();
-        
+
         foreach (var (roomType, keywords) in roomKeywords)
         {
             if (keywords.Any(keyword => query.Contains(keyword)))
             {
                 var suites = AppMemoryContext.Suites
-                    .Where(s => s.Type.ToLower().Contains(roomType) || 
+                    .Where(s => s.Type.ToLower().Contains(roomType) ||
                                s.SuiteName.ToLower().Contains(roomType))
                     .ToList();
                 matchingSuites.AddRange(suites);
@@ -293,7 +288,7 @@ public class AssistantModel : PageModel
         if (!matchingSuites.Any())
         {
             matchingSuites = AppMemoryContext.Suites
-                .Where(s => query.Contains(s.Type.ToLower()) || 
+                .Where(s => query.Contains(s.Type.ToLower()) ||
                            query.Contains(s.SuiteName.ToLower()))
                 .ToList();
         }
@@ -304,7 +299,7 @@ public class AssistantModel : PageModel
     private DateTime ExtractDate(string query)
     {
         var today = DateTime.Today;
-        
+
         foreach (var (keyword, offset) in dateOffsets)
         {
             if (query.Contains(keyword))
@@ -336,7 +331,7 @@ public class AssistantModel : PageModel
                 }
                 catch
                 {
-                    
+
                 }
             }
         }
@@ -380,21 +375,21 @@ public class AssistantModel : PageModel
                         "• Marble bathroom with rainfall shower\n" +
                         "• City or garden views\n" +
                         "• Complimentary refreshments",
-            
+
             ["standard"] = "**Standard Suite** - Comfortable and affordable!\n" +
                           "• Cozy and well-appointed room\n" +
                           "• Queen-size bed with quality linens\n" +
                           "• Modern bathroom with essential amenities\n" +
                           "• Work desk and seating area\n" +
                           "• Free WiFi and cable TV",
-            
+
             ["executive"] = " **Executive Suite** - Perfect for business travelers!\n" +
                            "• Separate living and sleeping areas\n" +
                            "• Executive lounge access\n" +
                            "• High-speed internet and work station\n" +
                            "• Complimentary breakfast\n" +
                            "• Meeting room privileges",
-            
+
             ["family"] = " **Family Suite** - Ideal for families!\n" +
                         "• Multiple bedrooms and common area\n" +
                         "• Kitchenette with essential appliances\n" +
@@ -415,4 +410,29 @@ public class AssistantModel : PageModel
         return $"The {suite.SuiteName} is a wonderful {suite.Type} suite! " +
                "Would you like me to check availability or provide more specific information?";
     }
+    
+    public void OnGet()
+    {
+        LoadHistory();
+    }
+
+    
+    private void LoadHistory()
+    {
+        if (TempData.TryGetValue("ChatHistory", out var data))
+        {
+            var json = data as string;
+            if (!string.IsNullOrEmpty(json))
+            {
+                Messages = JsonConvert.DeserializeObject<List<ChatMessage>>(json) ?? new();
+            }
+        }
+    }
+
+    private void SaveHistory()
+    {
+            TempData["ChatHistory"] = JsonConvert.SerializeObject(Messages);
+            TempData.Keep("ChatHistory");
+    }
+
 }

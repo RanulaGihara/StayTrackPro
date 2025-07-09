@@ -31,3 +31,6 @@ C:\Projects\test\dotnet\StayTrackPro\obj\Debug\net8.0\StayTrackPro.genruntimecon
 C:\Projects\test\dotnet\StayTrackPro\obj\Debug\net8.0\ref\StayTrackPro.dll
 C:\Projects\test\dotnet\StayTrackPro\bin\Debug\net8.0\package-lock.json
 C:\Projects\test\dotnet\StayTrackPro\bin\Debug\net8.0\package.json
+C:\Projects\test\dotnet\StayTrackPro\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Projects\test\dotnet\StayTrackPro\obj\Debug\net8.0\StayTrackPro.csproj.AssemblyReference.cache
+C:\Projects\test\dotnet\StayTrackPro\obj\Debug\net8.0\StayTrac.B572637F.Up2Date

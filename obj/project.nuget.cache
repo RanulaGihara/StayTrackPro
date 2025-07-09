@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Dm4hj3IEVPA=",
+  "dgSpecHash": "jjnmVH2NOXY=",
   "success": true,
   "projectFilePath": "C:\\Projects\\test\\dotnet\\StayTrackPro\\StayTrackPro.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\RanulaGamage\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
