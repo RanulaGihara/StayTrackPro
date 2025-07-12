@@ -5,15 +5,27 @@
 }
 
 <div class="container mt-4">
-    <h2 class="mb-4">Suite Details</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-0">
+                <div class="card-header text-black">
+                    <h4 class="mb-0">Suite Details</h4>
+                </div>
 
-    <dl class="row">
-        <dt class="col-sm-3">Suite Name</dt>
-        <dd class="col-sm-9">@Model.Suite.SuiteName</dd>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">Suite Name</dt>
+                        <dd class="col-sm-8 fw-semibold">@Model.Suite.SuiteName</dd>
 
-        <dt class="col-sm-3">Type</dt>
-        <dd class="col-sm-9">@Model.Suite.Type</dd>
-    </dl>
+                        <dt class="col-sm-4">Type</dt>
+                        <dd class="col-sm-8">@Model.Suite.Type</dd>
+                    </dl>
+                </div>
 
-    <a asp-page="Index" class="btn btn-outline-primary mt-3">Back to List</a>
+                <div class="card-footer bg-light text-end">
+                    <a asp-page="Index" class="btn btn-outline-primary">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
