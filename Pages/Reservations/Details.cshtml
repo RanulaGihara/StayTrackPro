@@ -31,27 +31,51 @@
         <dd class="col-sm-9">@Model.Reservation.DepartureDate.ToShortDateString()</dd>
     </dl>
 
-    @if (Model.Reservation.SpecialRequests.Any())
-    {
-        <h5 class="mt-4">Special Requests</h5>
-        <ul class="list-group mb-4">
-            @foreach (var request in Model.Reservation.SpecialRequests)
+   @if (Model.Reservation.SpecialRequests.Any())
+{
+    <h5 class="mt-4">Special Requests</h5>
+    <ul class="list-group mb-4">
+        @foreach (var request in Model.Reservation.SpecialRequests)
+        {
+            if (Model.EditingRequestId == request.Id)
             {
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    @request.Content
-                    <form method="post" asp-route-id="@Model.Reservation.Id" asp-route-deleteRequestId="@request.Id" class="ms-2">
-                        <button type="submit" class="btn btn-sm btn-danger" title="Delete">
-                            <i class="bi bi-x"></i>
+                <li class="list-group-item">
+                    <form method="post" asp-route-id="@Model.Reservation.Id" asp-route-editRequestId="@request.Id" class="d-flex align-items-center">
+                        <input type="text" name="updatedRequestContent" value="@request.Content" class="form-control me-2" required />
+                        <button type="submit" name="action" value="update" class="btn btn-sm btn-success me-1" title="Save">
+                            <i class="bi bi-check-lg"></i>
                         </button>
+                        <a asp-page="Details" asp-route-id="@Model.Reservation.Id" class="btn btn-sm btn-secondary" title="Cancel">
+                            <i class="bi bi-x-lg"></i>
+                        </a>
                     </form>
                 </li>
             }
-        </ul>
-    }
-    else
-    {
-        <p class="text-muted mt-4">No special requests.</p>
-    }
+            else
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    @request.Content
+                    <div class="d-flex">
+                        <form method="post" class="me-2" asp-route-id="@Model.Reservation.Id" asp-route-editRequestId="@request.Id">
+                            <button type="submit" name="action" value="edit" class="btn btn-sm btn-outline-warning" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </form>
+                        <form method="post" asp-route-id="@Model.Reservation.Id" asp-route-deleteRequestId="@request.Id">
+                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </li>
+            }
+        }
+    </ul>
+}
+else
+{
+    <p class="text-muted mt-4">No special requests.</p>
+}
 
     <h5 class="mt-4">Add Special Request</h5>
     <form method="post">

@@ -21,7 +21,7 @@ public class CreateModel : PageModel
     {
         if (!ModelState.IsValid)
         {
-            AvailableSuites = AppMemoryContext.Suites; // re-bind dropdown on validation error
+            AvailableSuites = AppMemoryContext.Suites; 
             return Page();
         }
 
