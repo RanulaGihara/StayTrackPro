@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using StayTrackPro.Data;
-using StayTrackPro.Models;
+using StayTrackPro.Shared.Models;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 

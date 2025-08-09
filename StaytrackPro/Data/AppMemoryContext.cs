@@ -1,4 +1,4 @@
-using StayTrackPro.Models;
+using StayTrackPro.Shared.Models;
 
 namespace StayTrackPro.Data;
 

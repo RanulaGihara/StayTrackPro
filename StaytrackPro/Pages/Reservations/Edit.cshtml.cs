@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StayTrackPro.Data;
-using StayTrackPro.Models;
+using StayTrackPro.Shared.Models;
 
 namespace StayTrackPro.Pages.Reservations
 {

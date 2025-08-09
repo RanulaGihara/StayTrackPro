@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using StayTrackPro.Data;
-using StayTrackPro.Models;
+using StayTrackPro.Shared.Models;
 
 namespace StayTrackPro.Pages.Reports;
 

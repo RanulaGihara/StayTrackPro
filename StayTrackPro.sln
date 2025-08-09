@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StayTrackPro", "StayTrackPro\StayTrackPro.csproj", "{2F630580-6769-4362-BCD6-0A5FAFA2024C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StayTrackPro.API", "StayTrackPro.API\StayTrackPro.API.csproj", "{4B89B64A-5FFE-46AF-AD97-904DD1B683B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StayTrackPro.Shared", "StayTrackPro.Shared\StayTrackPro.Shared.csproj", "{84DE9DFD-576F-48D2-9F82-258F75D48023}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F630580-6769-4362-BCD6-0A5FAFA2024C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F630580-6769-4362-BCD6-0A5FAFA2024C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F630580-6769-4362-BCD6-0A5FAFA2024C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F630580-6769-4362-BCD6-0A5FAFA2024C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B89B64A-5FFE-46AF-AD97-904DD1B683B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B89B64A-5FFE-46AF-AD97-904DD1B683B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B89B64A-5FFE-46AF-AD97-904DD1B683B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B89B64A-5FFE-46AF-AD97-904DD1B683B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84DE9DFD-576F-48D2-9F82-258F75D48023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84DE9DFD-576F-48D2-9F82-258F75D48023}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84DE9DFD-576F-48D2-9F82-258F75D48023}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84DE9DFD-576F-48D2-9F82-258F75D48023}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
