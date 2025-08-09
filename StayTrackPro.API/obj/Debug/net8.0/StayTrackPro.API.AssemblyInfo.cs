@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StayTrackPro.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+128368b4da1e650d1ff117a1f01b3fda04fdc110")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a83d12dbd43fd6627c9a0dfc7be2b2c4787990d4")]
 [assembly: System.Reflection.AssemblyProductAttribute("StayTrackPro.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StayTrackPro.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

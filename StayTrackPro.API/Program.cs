@@ -1,7 +1,17 @@
+using Microsoft.EntityFrameworkCore; 
+using StayTrackPro.API.Models;        
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
-builder.Services.AddControllers(); 
+builder.Services.AddControllers()
+    .AddXmlSerializerFormatters();
+
+// Register DbContext with correct key
+builder.Services.AddDbContext<StayTrackProDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("StayTrackProDb")));
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -17,7 +27,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
-app.MapControllers(); 
+app.MapControllers();
+
 // Optional: Keep this if you want the weather route too
 app.MapGet("/weatherforecast", () =>
 {
