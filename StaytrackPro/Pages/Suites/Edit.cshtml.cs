@@ -1,41 +1,54 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using StayTrackPro.Data;
 using StayTrackPro.Shared.Models;
+using System.Net.Http.Json;
 
-namespace StayTrackPro.Pages.Suites;
-
-public class EditModel : PageModel
+namespace StayTrackPro.Pages.Suites
 {
-    [BindProperty]
-    public Suite Suite { get; set; }
-
-    public IActionResult OnGet(int id)
+    public class EditModel : PageModel
     {
-        Suite = AppMemoryContext.Suites.FirstOrDefault(s => s.Id == id);
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        if (Suite == null)
+        public EditModel(IHttpClientFactory httpClientFactory)
         {
-            return RedirectToPage("Index");
+            _httpClientFactory = httpClientFactory;
         }
 
-        return Page();
-    }
+        [BindProperty]
+        public Suite Suite { get; set; }
 
-    public IActionResult OnPost()
-    {
-        if (!ModelState.IsValid)
+        // GET: Load suite data from API
+        public async Task<IActionResult> OnGetAsync(int id)
         {
+            var client = _httpClientFactory.CreateClient("StayTrackProApi");
+            Suite = await client.GetFromJsonAsync<Suite>($"suites/{id}");
+
+            if (Suite == null)
+            {
+                return RedirectToPage("Index");
+            }
+
             return Page();
         }
 
-        var existing = AppMemoryContext.Suites.FirstOrDefault(s => s.Id == Suite.Id);
-        if (existing != null)
+        // POST: Send update request to API
+        public async Task<IActionResult> OnPostAsync()
         {
-            existing.SuiteName = Suite.SuiteName;
-            existing.Type = Suite.Type;
-        }
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
-        return RedirectToPage("Index");
+            var client = _httpClientFactory.CreateClient("StayTrackProApi");
+            var response = await client.PutAsJsonAsync($"suites/{Suite.Id}", Suite);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToPage("Index");
+            }
+
+            ModelState.AddModelError(string.Empty, "Error updating suite.");
+            return Page();
+        }
     }
 }
