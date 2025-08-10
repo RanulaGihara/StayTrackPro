@@ -1,35 +1,48 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using StayTrackPro.Data;
 using StayTrackPro.Shared.Models;
+using System.Net.Http.Json;
 
-namespace StayTrackPro.Pages.Reservations;
-
-public class DeleteModel : PageModel
+namespace StayTrackPro.Pages.Reservations
 {
-    [BindProperty]
-    public Reservation Reservation { get; set; }
-
-    public IActionResult OnGet(int id)
+    public class DeleteModel : PageModel
     {
-        Reservation = AppMemoryContext.Reservations.FirstOrDefault(r => r.Id == id);
+        private readonly IHttpClientFactory _clientFactory;
 
-        if (Reservation == null)
+        public DeleteModel(IHttpClientFactory clientFactory)
         {
+            _clientFactory = clientFactory;
+        }
+
+        [BindProperty]
+        public Reservation Reservation { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(int id)
+        {
+            var client = _clientFactory.CreateClient("StayTrackProApi");
+            var response = await client.GetAsync($"reservations/{id}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return RedirectToPage("Index");
+            }
+
+            Reservation = await response.Content.ReadFromJsonAsync<Reservation>();
+
+            if (Reservation == null)
+            {
+                return RedirectToPage("Index");
+            }
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            var client = _clientFactory.CreateClient("StayTrackProApi");
+            var response = await client.DeleteAsync($"reservations/{Reservation.Id}");
+
             return RedirectToPage("Index");
         }
-
-        return Page();
-    }
-
-    public IActionResult OnPost()
-    {
-        var existing = AppMemoryContext.Reservations.FirstOrDefault(r => r.Id == Reservation.Id);
-        if (existing != null)
-        {
-            AppMemoryContext.Reservations.Remove(existing);
-        }
-
-        return RedirectToPage("Index");
     }
 }

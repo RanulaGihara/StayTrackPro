@@ -12,9 +12,9 @@
         <input type="hidden" asp-for="Reservation.Id" />
 
         <div class="mb-3">
-            <label asp-for="Reservation.GuestFullName" class="form-label"></label>
-            <input asp-for="Reservation.GuestFullName" class="form-control" />
-            <span asp-validation-for="Reservation.GuestFullName" class="text-danger"></span>
+            <label asp-for="Reservation.GuestName" class="form-label"></label>
+            <input asp-for="Reservation.GuestName" class="form-control" />
+            <span asp-validation-for="Reservation.GuestName" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
@@ -26,13 +26,13 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="Reservation.ArrivalDate" class="form-label"></label>
-            <input asp-for="Reservation.ArrivalDate" type="date" class="form-control" />
+            <label asp-for="Reservation.CheckIn" class="form-label"></label>
+            <input asp-for="Reservation.CheckIn" type="date" class="form-control" />
         </div>
 
         <div class="mb-3">
-            <label asp-for="Reservation.DepartureDate" class="form-label"></label>
-            <input asp-for="Reservation.DepartureDate" type="date" class="form-control" />
+            <label asp-for="Reservation.CheckOut" class="form-label"></label>
+            <input asp-for="Reservation.CheckOut" type="date" class="form-control" />
         </div>
 
         <button type="submit" class="btn btn-success">Update</button>

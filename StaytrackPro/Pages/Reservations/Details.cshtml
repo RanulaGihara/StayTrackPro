@@ -16,7 +16,7 @@
 
     <dl class="row">
         <dt class="col-sm-3">Guest Name</dt>
-        <dd class="col-sm-9">@Model.Reservation.GuestFullName</dd>
+        <dd class="col-sm-9">@Model.Reservation.GuestName</dd>
 
         <dt class="col-sm-3">Suite NAme</dt>
         <dd class="col-sm-9">@suiteType</dd>
@@ -25,10 +25,10 @@
         <dd class="col-sm-9">@suiteName</dd>
 
         <dt class="col-sm-3">Arrival Date</dt>
-        <dd class="col-sm-9">@Model.Reservation.ArrivalDate.ToShortDateString()</dd>
+        <dd class="col-sm-9">@Model.Reservation.CheckIn.ToShortDateString()</dd>
 
         <dt class="col-sm-3">Departure Date</dt>
-        <dd class="col-sm-9">@Model.Reservation.DepartureDate.ToShortDateString()</dd>
+        <dd class="col-sm-9">@Model.Reservation.CheckOut.ToShortDateString()</dd>
     </dl>
 
    @if (Model.Reservation.SpecialRequests.Any())

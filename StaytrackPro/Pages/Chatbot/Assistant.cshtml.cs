@@ -218,7 +218,7 @@ public class AssistantModel : PageModel
         {
             var isBooked = AppMemoryContext.Reservations.Any(r =>
                 r.SuiteId == suite.Id &&
-                date >= r.ArrivalDate && date <= r.DepartureDate);
+                date >= r.CheckIn && date <= r.CheckOut);
 
             if (!isBooked)
             {

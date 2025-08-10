@@ -11,7 +11,7 @@ public class WeeklyModel : PageModel
     public void OnGet()
     {
         WeeklyReservations = AppMemoryContext.Reservations
-            .GroupBy(r => r.ArrivalDate.DayOfWeek)
+            .GroupBy(r => r.CheckIn.DayOfWeek)
             .OrderBy(g => (int)g.Key)
             .ToDictionary(g => g.Key, g => g.ToList());
     }

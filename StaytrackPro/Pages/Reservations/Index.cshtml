@@ -26,10 +26,10 @@
                     @foreach (var item in Model.Reservations)
                     {
                         <tr>
-                            <td>@item.GuestFullName</td>
+                            <td>@item.GuestName</td>
                             <td>@item.SuiteId</td>
-                            <td>@item.ArrivalDate.ToShortDateString()</td>
-                            <td>@item.DepartureDate.ToShortDateString()</td>
+                            <td>@item.CheckIn.ToShortDateString()</td>
+                            <td>@item.CheckOut.ToShortDateString()</td>
                             <td>
                                 <a asp-page="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary me-1" title="View">
                                     <i class="bi bi-eye"></i>

@@ -10,10 +10,10 @@
     <p>Are you sure you want to delete this reservation?</p>
 
     <ul class="list-group mb-4">
-        <li class="list-group-item"><strong>Guest:</strong> @Model.Reservation.GuestFullName</li>
+        <li class="list-group-item"><strong>Guest:</strong> @Model.Reservation.GuestName</li>
         <li class="list-group-item"><strong>Suite ID:</strong> @Model.Reservation.SuiteId</li>
-        <li class="list-group-item"><strong>Arrival:</strong> @Model.Reservation.ArrivalDate.ToShortDateString()</li>
-        <li class="list-group-item"><strong>Departure:</strong> @Model.Reservation.DepartureDate.ToShortDateString()</li>
+        <li class="list-group-item"><strong>Arrival:</strong> @Model.Reservation.CheckIn.ToShortDateString()</li>
+        <li class="list-group-item"><strong>Departure:</strong> @Model.Reservation.CheckOut.ToShortDateString()</li>
     </ul>
 
     <form method="post">
