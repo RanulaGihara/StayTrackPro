@@ -28,6 +28,7 @@ namespace StayTrackPro.API.Controllers
                 {
                     Id = s.Id,
                     SuiteName = s.SuiteName,
+                    Type = s.Type,
                     PricePerNight = s.PricePerNight
                 })
                 .ToListAsync();
@@ -46,6 +47,7 @@ namespace StayTrackPro.API.Controllers
             {
                 Id = suite.Id,
                 SuiteName = suite.SuiteName,
+                Type = suite.Type,
                 PricePerNight = suite.PricePerNight
             });
         }
@@ -57,6 +59,7 @@ namespace StayTrackPro.API.Controllers
             var suite = new Suite
             {
                 SuiteName = dto.SuiteName,
+                Type = dto.Type,
                 PricePerNight = dto.PricePerNight
             };
 
@@ -75,6 +78,7 @@ namespace StayTrackPro.API.Controllers
             if (suite == null) return NotFound();
 
             suite.SuiteName = dto.SuiteName;
+            suite.Type = dto.Type;
             suite.PricePerNight = dto.PricePerNight;
 
             await _context.SaveChangesAsync();
