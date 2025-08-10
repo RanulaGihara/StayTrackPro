@@ -7,7 +7,7 @@
         .FirstOrDefault(s => s.Id == Model.Reservation.SuiteId)?.Type ?? "Unknown";
 
         
-    var suiteName = StayTrackPro.Data.AppMemoryContext.Suites
+    var SuiteName = StayTrackPro.Data.AppMemoryContext.Suites
         .FirstOrDefault(s => s.Id == Model.Reservation.SuiteId)?.SuiteName ?? "Unknown";
 }
 
@@ -19,10 +19,10 @@
         <dd class="col-sm-9">@Model.Reservation.GuestName</dd>
 
         <dt class="col-sm-3">Suite NAme</dt>
-        <dd class="col-sm-9">@suiteType</dd>
+        <dd class="col-sm-9">@SuiteName</dd>
 
          <dt class="col-sm-3">Suite Type</dt>
-        <dd class="col-sm-9">@suiteName</dd>
+        <dd class="col-sm-9">@SuiteName</dd>
 
         <dt class="col-sm-3">Arrival Date</dt>
         <dd class="col-sm-9">@Model.Reservation.CheckIn.ToShortDateString()</dd>

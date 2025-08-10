@@ -8,7 +8,7 @@ namespace StayTrackPro.API.Models
 
         [Required(ErrorMessage = "Suite type is required.")]
         [StringLength(100, ErrorMessage = "Suite type cannot exceed 100 characters.")]
-        public string SuiteType { get; set; } = string.Empty;
+        public string SuiteName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Price per night is required.")]
         [Range(0, 999999.99, ErrorMessage = "Price must be a positive value.")]

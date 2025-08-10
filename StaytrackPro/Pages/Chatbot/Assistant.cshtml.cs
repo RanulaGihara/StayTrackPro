@@ -353,9 +353,9 @@ public class AssistantModel : PageModel
         return today.AddDays(daysUntilSaturday == 0 ? 7 : daysUntilSaturday);
     }
 
-    private decimal GetSuitePrice(string suiteType)
+    private decimal GetSuitePrice(string SuiteName)
     {
-        return suiteType.ToLower() switch
+        return SuiteName.ToLower() switch
         {
             "deluxe" => 199.99m,
             "executive" => 249.99m,
@@ -398,10 +398,10 @@ public class AssistantModel : PageModel
                         "• Connecting rooms available"
         };
 
-        var suiteType = suite.Type.ToLower();
+        var SuiteName = suite.Type.ToLower();
         foreach (var (key, description) in descriptions)
         {
-            if (suiteType.Contains(key))
+            if (SuiteName.Contains(key))
             {
                 return description + $"\n\nWould you like to check availability for the {suite.SuiteName}?";
             }

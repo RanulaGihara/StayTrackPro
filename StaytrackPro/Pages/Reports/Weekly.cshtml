@@ -24,7 +24,7 @@
                                 <div class="mb-3 border-bottom pb-2">
                                     <p class="mb-1"><strong>Guest:</strong> @reservation.GuestName</p>
                                     <p class="mb-1"><strong>Suite:</strong> @Model.GetSuiteName(reservation.SuiteId)</p>
-                                    <p class="mb-1"><strong>Type:</strong> @Model.GetSuiteType(reservation.SuiteId)</p>
+                                    <p class="mb-1"><strong>Type:</strong> @Model.GetSuiteName(reservation.SuiteId)</p>
                                     <p class="mb-1"><strong>Arrive:</strong> @reservation.CheckIn.ToShortDateString()</p>
                                     <p class="mb-1"><strong>Depart:</strong> @reservation.CheckOut.ToShortDateString()</p>
                                 </div>
