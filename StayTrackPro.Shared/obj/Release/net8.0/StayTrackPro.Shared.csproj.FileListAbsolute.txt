@@ -1,0 +1,12 @@
+C:\Projects\test\dotnet\StayTrackPro\StayTrackPro.Shared\bin\Release\net8.0\StayTrackPro.Shared.deps.json
+C:\Projects\test\dotnet\StayTrackPro\StayTrackPro.Shared\bin\Release\net8.0\StayTrackPro.Shared.dll
+C:\Projects\test\dotnet\StayTrackPro\StayTrackPro.Shared\bin\Release\net8.0\StayTrackPro.Shared.pdb
+C:\Projects\test\dotnet\StayTrackPro\StayTrackPro.Shared\obj\Release\net8.0\StayTrackPro.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\test\dotnet\StayTrackPro\StayTrackPro.Shared\obj\Release\net8.0\StayTrackPro.Shared.AssemblyInfoInputs.cache
+C:\Projects\test\dotnet\StayTrackPro\StayTrackPro.Shared\obj\Release\net8.0\StayTrackPro.Shared.AssemblyInfo.cs
+C:\Projects\test\dotnet\StayTrackPro\StayTrackPro.Shared\obj\Release\net8.0\StayTrackPro.Shared.csproj.CoreCompileInputs.cache
+C:\Projects\test\dotnet\StayTrackPro\StayTrackPro.Shared\obj\Release\net8.0\StayTrackPro.Shared.sourcelink.json
+C:\Projects\test\dotnet\StayTrackPro\StayTrackPro.Shared\obj\Release\net8.0\StayTrackPro.Shared.dll
+C:\Projects\test\dotnet\StayTrackPro\StayTrackPro.Shared\obj\Release\net8.0\refint\StayTrackPro.Shared.dll
+C:\Projects\test\dotnet\StayTrackPro\StayTrackPro.Shared\obj\Release\net8.0\StayTrackPro.Shared.pdb
+C:\Projects\test\dotnet\StayTrackPro\StayTrackPro.Shared\obj\Release\net8.0\ref\StayTrackPro.Shared.dll

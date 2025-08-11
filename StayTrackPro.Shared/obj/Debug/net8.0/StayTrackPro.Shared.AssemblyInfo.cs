@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StayTrackPro.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de77c0095adbd95d2ea84ce628298083267c079a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dd0ff21969e02107d1c4a314b948a49405eb11a8")]
 [assembly: System.Reflection.AssemblyProductAttribute("StayTrackPro.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StayTrackPro.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
