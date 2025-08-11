@@ -3,11 +3,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-// Register HttpClient for API calls
+// Read API URL from configuration
+var apiBaseUrl = builder.Configuration["ApiBaseUrl"] 
+                 ?? "http://localhost:5007/api/";
+
 builder.Services.AddHttpClient("StayTrackProApi", client =>
 {
-    // Local API base address — change if deployed
-    client.BaseAddress = new Uri("http://localhost:5007/api/");
+    client.BaseAddress = new Uri(apiBaseUrl);
 });
 
 var app = builder.Build();
@@ -16,7 +18,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days.
     app.UseHsts();
 }
 

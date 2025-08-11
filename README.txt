@@ -13,6 +13,17 @@ http://localhost:5007/swagger
 #run tests in API.test
 dotnet test
 
-# Rebuild and deploy 
+#rebuild and deploy 
 dotnet build
 az webapp up --name staytrackpro-api --resource-group StayTrackProRG --runtime "dotnet:8"
+
+#deployed backend 
+https://staytrackpro-api-fxewggh3fvazd0ac.scm.indonesiacentral-01.azurewebsites.net/api/deployments/latest
+
+#deployed frontend 
+https://staytrackpro-frontend-fkgpfxhhbza4f9db.indonesiacentral-01.azurewebsites.net/Reservations
+
+#restart App
+az webapp restart `
+  --resource-group staytrackpro-rg `
+  --name staytrackpro-frontend
