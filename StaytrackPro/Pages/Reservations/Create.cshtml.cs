@@ -15,22 +15,14 @@ namespace StayTrackPro.Pages.Reservations
         }
 
         [BindProperty]
-        public Reservation Reservation { get; set; }
+        public Reservation Reservation { get; set; } = new Reservation();
 
         public List<Suite> AvailableSuites { get; set; } = new();
 
         // GET: Load suites from API
         public async Task OnGetAsync()
         {
-            var client = _clientFactory.CreateClient("StayTrackProApi");
-
-            var suitesResponse = await client.GetAsync("suites");
-            if (suitesResponse.IsSuccessStatusCode)
-            {
-                var suites = await suitesResponse.Content.ReadFromJsonAsync<List<Suite>>();
-                if (suites != null)
-                    AvailableSuites = suites;
-            }
+            await LoadSuitesAsync();
         }
 
         // POST: Create reservation in API
@@ -38,21 +30,59 @@ namespace StayTrackPro.Pages.Reservations
         {
             if (!ModelState.IsValid)
             {
-                await OnGetAsync(); // reload suites for dropdown
+                await LoadSuitesAsync(); // reload suites for dropdown
                 return Page();
             }
 
             var client = _clientFactory.CreateClient("StayTrackProApi");
-            var postResponse = await client.PostAsJsonAsync("reservations", Reservation);
 
-            if (postResponse.IsSuccessStatusCode)
+            try
             {
-                return RedirectToPage("Index");
+                var postResponse = await client.PostAsJsonAsync("reservations", Reservation);
+
+                if (postResponse.IsSuccessStatusCode)
+                {
+                    return RedirectToPage("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", $"Error creating reservation: {postResponse.ReasonPhrase}");
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"API call failed: {ex.Message}");
             }
 
-            ModelState.AddModelError("", "Error creating reservation. Please try again.");
-            await OnGetAsync();
+            await LoadSuitesAsync();
             return Page();
+        }
+
+        private async Task LoadSuitesAsync()
+        {
+            var client = _clientFactory.CreateClient("StayTrackProApi");
+
+            try
+            {
+                var suites = await client.GetFromJsonAsync<List<Suite>>("suites");
+                if (suites != null && suites.Any())
+                {
+                    AvailableSuites = suites;
+                }
+                else
+                {
+                    // Add placeholder if no suites found
+                    AvailableSuites = new List<Suite>
+                    {
+                        new Suite { Id = 0, SuiteName = "No suites available" }
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"Error loading suites: {ex.Message}");
+                AvailableSuites = new List<Suite>(); // Prevent null ref in Razor
+            }
         }
     }
 }

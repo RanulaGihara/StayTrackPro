@@ -27,3 +27,29 @@ https://staytrackpro-frontend-fkgpfxhhbza4f9db.indonesiacentral-01.azurewebsites
 az webapp restart `
   --resource-group staytrackpro-rg `
   --name staytrackpro-frontend
+
+
+#step 1 — Rebuild & publish locally
+dotnet publish -c Release -o ./publish
+
+#step 2 — Zip the publish folder
+Compress-Archive -Path .\publish\* -DestinationPath .\publish.zip -Force
+
+#step 3 — Deploy to the same Azure Web App
+
+az webapp deploy `
+  --resource-group staytrackpro-rg `
+  --name staytrackpro-api `
+  --src-path .\publish.zip `
+  --type zip
+
+  #verify the URL
+  az webapp show `
+  --resource-group staytrackpro-rg `
+  --name staytrackpro-frontend `
+  --query defaultHostName `
+  --output tsv
+
+
+#running frontend connected with backend
+https://staytrackpro-frontend-fkgpfxhhbza4f9db.indonesiacentral-01.azurewebsites.net/Reservations
