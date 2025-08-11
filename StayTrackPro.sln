@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StayTrackPro.API", "StayTra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StayTrackPro.Shared", "StayTrackPro.Shared\StayTrackPro.Shared.csproj", "{84DE9DFD-576F-48D2-9F82-258F75D48023}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StayTrackPro.API.Tests", "StayTrackPro.API.Tests\StayTrackPro.API.Tests.csproj", "{619C6CF7-7FB7-45CF-A324-2CDAC067604B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{84DE9DFD-576F-48D2-9F82-258F75D48023}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84DE9DFD-576F-48D2-9F82-258F75D48023}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84DE9DFD-576F-48D2-9F82-258F75D48023}.Release|Any CPU.Build.0 = Release|Any CPU
+		{619C6CF7-7FB7-45CF-A324-2CDAC067604B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{619C6CF7-7FB7-45CF-A324-2CDAC067604B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{619C6CF7-7FB7-45CF-A324-2CDAC067604B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{619C6CF7-7FB7-45CF-A324-2CDAC067604B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

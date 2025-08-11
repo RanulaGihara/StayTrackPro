@@ -9,3 +9,6 @@ curl http://localhost:5007/api/suites
 
 #swagger
 http://localhost:5007/swagger
+
+#run tests in API.test
+dotnet test
