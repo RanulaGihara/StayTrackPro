@@ -12,3 +12,7 @@ http://localhost:5007/swagger
 
 #run tests in API.test
 dotnet test
+
+# Rebuild and deploy 
+dotnet build
+az webapp up --name staytrackpro-api --resource-group StayTrackProRG --runtime "dotnet:8"
